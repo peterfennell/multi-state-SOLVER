@@ -5,12 +5,14 @@ The main function is multi_state_solver(). This has the form
 
 **function [t_points x_tots] = multi_state_solver(n,DegreeDistribution,DistParams,DynamicsParams,rho0,endtime,scheme)**,
 
-and the various inputs and outputs are described in lines 3-30 of the file multi_state_solver.m. 
+and the various function inputs and outputs are described in lines 3-30 of the file multi_state_solver.m. 
 
 The rate matrix function F for the dynamics (see [1]) should be specified in the file F_rates.m. Example rate functions for different dynamics including the SI and SIS model, the Bass diffusion model, the generalize model of interacting diseases of Sanz et al. [2] and the Ising Glauber model are included. 
 
 For example, to reproduce Fig. 4 (left) in [1], uncomment lines 43-48 of F_rates.m and run the command
-> multi_state_solver(4,'zRegular',4,[0.0625 2],[0.9779 0.01 0.01 0.001],10, scheme)
+
+**multi_state_solver(4,'zRegular',4,[0.0625 2],[0.9779 0.01 0.01 0.001],10, scheme)**
+
 in MATLAB or Octave, where scheme = 'MF' for the MF curve, 'PA' for the PA curve of 'AM' for the AME curve
 
 Note the following two important points:
