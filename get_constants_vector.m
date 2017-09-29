@@ -97,7 +97,7 @@ n_a_combs = length(non_null_lin_indices);
 
 qk = zeros(k_dim,1);
 if(k_dim == 1)
-    qk = 1
+    qk = 1;
 else
     z = dot(Kmin:Kmax,pkdash);
     for k=1:k_dim

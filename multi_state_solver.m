@@ -80,9 +80,9 @@ sys_dims_single_state = [repmat(a_dim,1,n) k_dim];
 % n with a_1, ..., a_n neighbours in state 1, .., n respectively 
 % Get the initial fraction of nodes in each compartment
 if(sum(rho0) ~= 1)
-    disp(strcat('Sum of rho0 is NOT one; = ',num2str(sum(rho0))));
-    s=-1;
-    return;
+    disp(strcat('WARNING: Sum of rho0 is NOT one; = ',num2str(sum(rho0))));
+    %s=-1;
+    %return;
 end
 
 [x0_AME x0_PA x0_MF] = initial_conditions_vector(rho0, n, sys_dims, a_dim, a_min, k_dim, Kmin, Kmax, combs, non_null_lin_indices, mult_coeff);
@@ -100,8 +100,10 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Set ODE solver parameters
-options = odeset('RelTol',1e-8,'AbsTol',1e-10,'InitialStep',1e-3,'MaxStep',1.5); % defaults are 'RelTol',1e-3,'AbsTol',1e-6
-tspan= [0 endtime]; %0:endtime/100:endtime;
+options = odeset('RelTol',1e-8,'AbsTol',1e-10); %,'InitialStep',1e-3,'MaxStep',1.5); % defaults are 'RelTol',1e-3,'AbsTol',1e-6
+tspan= [0 endtime];
+% tspan = 0:endtime/100:endtime; (For CoSIS)
+% tspan = logspace(0, log10(endtime), 100);
 % tspan = logspace(-2,log10(endtime),300); %0:endtime/100:endtime; %
 
 
@@ -110,10 +112,9 @@ tspan= [0 endtime]; %0:endtime/100:endtime;
 
 
 % MF
-
-if(scheme == 'MF')
+if(strcmp(scheme,'MF'))
     fprintf('System initialized, MF simulation commenced.\n');
-    [T_MF,Y_MF]=ode2r(@(t,x) f_n_state_MF_vector(t, x, Fvec, Rvec, al, k_dim, Kmin, n, a_min, a_max, k_pk, qk, mult_coeff, n_a_combs), tspan, x0_MF, options);
+    [T_MF,Y_MF]=ode45(@(t,x) f_n_state_MF_vector(t, x, Fvec, Rvec, al, k_dim, Kmin, n, a_min, a_max, k_pk, qk, mult_coeff, n_a_combs), tspan, x0_MF, options);
     Y_MF = reshape(Y_MF,[length(T_MF) k_dim n]);
     X_MF = zeros(length(T_MF),n);
     for i=1:n
@@ -128,9 +129,9 @@ if(scheme == 'MF')
     fprintf('Numerical solution completed\n');
     t_points = T_MF;
     x_tots   = X_MF;
-elseif(scheme == 'PA')
+elseif(strcmp(scheme,'PA'))
     fprintf('System initialized, PA simulation commenced.\n');
-    [T_PA,Y_PA]=ode2r(@(t,x) f_n_state_PA_vector(t, x, Fvec, Rvec, al_pk, al, k_dim, Kmin, n, a_min, a_max, k_pk, mult_coeff, n_a_combs), tspan, x0_PA, options);
+    [T_PA,Y_PA]=ode45(@(t,x) f_n_state_PA_vector(t, x, Fvec, Rvec, al_pk, al, k_dim, Kmin, n, a_min, a_max, k_pk, mult_coeff, n_a_combs), tspan, x0_PA, options);
     X_PA_temp = reshape(Y_PA(:,1:(n*k_dim)),[length(T_PA) n k_dim]);
     X_PA = zeros(length(T_PA),n);
     for i=1:n
@@ -148,7 +149,7 @@ elseif(scheme == 'PA')
     x_tots   = X_PA;
 else
     fprintf('System initialized, AME solver commenced.\n');
-    [T_AME,Y_AME]=ode2r(@(t,x) f_n_state_AME_vector(t, x, Fvec, Rvec, al_pk, al, al_plus1, k_dim, a_dim, n, non_null_lin_indices, index_shift, index_removal), tspan, x0_AME, options);
+    [T_AME,Y_AME]=ode45(@(t,x) f_n_state_AME_vector(t, x, Fvec, Rvec, al_pk, al, al_plus1, k_dim, a_dim, n, non_null_lin_indices, index_shift, index_removal), tspan, x0_AME, options);
     Y_AME  = reshape(Y_AME, [length(T_AME) length(non_null_lin_indices) n]);
     x_tots = zeros(length(T_AME), n);
     for t=1:length(T_AME)

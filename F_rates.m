@@ -9,15 +9,15 @@ function F = F_rates(m_vec, DynamicsParams)
 % F = [0 beta*m_vec(2);
 %     mu 0];
 
-% % Fredrickson Andersen model
-% T = DynamicsParams(1);  % temperature
-% f = DynamicsParams(2);  % facilitation parameter
-% spin_down = m_vec(1) + m_vec(3);
-% if(spin_down >= f)
-%     F = [0 0 0 1; 0 0 exp(-1/T) 0; 0 0 0 1; 0 0 exp(-1/T) 0];
-% else
-%     F = zeros(4);
-% end
+% Fredrickson Andersen model
+T = DynamicsParams(1);  % temperature
+f = DynamicsParams(2);  % facilitation parameter
+spin_down = m_vec(1) + m_vec(3);
+if(spin_down >= f)
+    F = [0 0 0 1; 0 0 exp(-1/T) 0; 0 0 0 1; 0 0 exp(-1/T) 0];
+else
+    F = zeros(4);
+end
 
 
 % % % Cooperative SIS (Sanz et al. "Dynamics of Interacting Diseases",Phys Rev X, 2014)
