@@ -9,7 +9,7 @@ The main function is multi_state_solver(). This has the form
 
 and the various function inputs and outputs are described in lines 3-30 of the file multi_state_solver.m. 
 
-The rate matrix function **F** for the dynamics (see Introduction of [1] and specific **F** examples Eqs.(25) and (40)) should be specified in the file F_rates.m. Example rate functions for different dynamics including the SI and SIS model, the Bass diffusion model, the generalize model of interacting diseases of Sanz et al. [2] and the Ising Glauber model are included. 
+The rate matrix function **F** for the dynamics (see Introduction of [1] and specific **F** examples Eqs.(25) and (40)) should be specified in the file F_rates.m. Example rate functions for different dynamics including the SI and SIS model, the Bass diffusion model, the generalizes model of interacting diseases of Sanz et al. [2] and the Ising Glauber model are included. 
 
 ## Examples
 
