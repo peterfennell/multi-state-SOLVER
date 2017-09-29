@@ -53,7 +53,7 @@ set(l,'Interpreter','latex','Location','northeast')
 legend boxoff
 set(get(gca,'ylabel'),'rotation',0)
 
-% 1: Supercritical beta
+% 1: Subcritical beta
 
 beta = 2.0/z;
 DynamicsParams = [beta lambda];
