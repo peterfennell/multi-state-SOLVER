@@ -1,5 +1,5 @@
 # multi-state-SOLVER
-MATLAB/Octave code for numerically solving multi-state degree-based frameworks, as presented in [1]. 
+MATLAB/Octave code for numerically solving multi-state degree-based frameworks, as presented in [1]. Please download all files to your desired destination and use the *multi_state_solver* function from there.
 
 ## Program Files
 
