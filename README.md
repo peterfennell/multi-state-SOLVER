@@ -13,7 +13,7 @@ The rate matrix function F for the dynamics (see [1]) should be specified in the
 
 ## Examples
 
-Two comprehensive examples are included here; these are ExCooperativeSISmodel.m which reproduces Fig. 4 in [1] and ExFAmodel.m and which reproduces Fig. 4 in [1]. These examples should make the usage of the multi_state_solver very clear. When using these examples please make sure to uncomment the relative rate functions in the F_rates.mat files (this is explained in the example .m files). 
+Two comprehensive examples are included here; these are ExCooperativeSISmodel.m which reproduces Fig. 4 in [1] and ExFAmodel.m and which reproduces Fig. 8 in [1]. These examples should make the usage of the multi_state_solver very clear. When using these examples please make sure to uncomment the relative rate functions in the F_rates.mat files (this is explained in the example .m files). 
 
 ## Notes
 
