@@ -1,6 +1,8 @@
 # multi-state-SOLVER
 MATLAB/Octave code for numerically solving multi-state degree-based frameworks, as presented in [1]. 
 
+## Program Files
+
 The main function is multi_state_solver(). This has the form
 
 **function [t_points x_tots] = multi_state_solver(n,DegreeDistribution,DistParams,DynamicsParams,rho0,endtime,scheme)**,
@@ -9,16 +11,17 @@ and the various function inputs and outputs are described in lines 3-30 of the f
 
 The rate matrix function F for the dynamics (see [1]) should be specified in the file F_rates.m. Example rate functions for different dynamics including the SI and SIS model, the Bass diffusion model, the generalize model of interacting diseases of Sanz et al. [2] and the Ising Glauber model are included. 
 
-For example, to reproduce Fig. 4 (left) in [1], uncomment lines 43-48 of F_rates.m and run the command
+## Examples
 
-**multi_state_solver(4,'zRegular',4,[0.0625 2],[0.9779 0.01 0.01 0.001],10, scheme)**
+Two comprehensive examples are included here; these are ExCooperativeSISmodel.m which reproduces Fig. 4 in [1] and ExFAmodel.m and which reproduces Fig. 4 in [1]. These examples should make the usage of the multi_state_solver very clear. When using these examples please make sure to uncomment the relative rate functions in the F_rates.mat files (this is explained in the example .m files). 
 
-in MATLAB or Octave, where scheme = 'MF' for the MF curve, 'PA' for the PA curve of 'AM' for the AME curve
+## Notes
 
-Note the following two important points:
- - By default, an ode solver for stiff system is employed to gaurantee accuracy. This may be uneccesary for many dynamics, in which cases ode45 should be used (by replacing "ode2r" with "ode45" in lines 116 (MF), 133 (PA) and/or 155 (AME) of the file multi_state_solver.m)
- - If alternatice time stamps are required (from the output t_points), specific time stamps can be specified by the tspan argument on line 104 of multi_state_solver.m. For example, the commented-out line 105 gives time stamps that are evenly spaces on a logaritmic x-axis. 
+Note the following three important points:
+ - The pair approximation ("PA") scheme requires non-zero initial conditions. The reason for this is a division by zero of the state variables (as seen in Eq.(18) of [1]).
+ - The default ode solver is used here, ode45. For stiff systems, ode2r should be employed to gaurantee accuracy (This can be done by replacing "ode2r" with "ode45" in lines 116 (MF), 133 (PA) and/or 151 (AME) of the file multi_state_solver.m)
+ - If alternatice time stamps are required (from the output t_points), specific time stamps can be specified by the tspan argument on line 104 of multi_state_solver.m. For example, the commented-out line 105 gives time stamps that are evenly spaced, while the commented-out line 106 gives time stamps that are evenly spaced on a logaritmic x-axis. 
 
-[1] Fennell, P.G., Gleeson, J.P., "Multistate dynamical processes on networks: analysis through degree-based approximation frameworks.", in preparation
+[1] Fennell, P.G., Gleeson, J.P., "Multistate dynamical processes on networks: Analysis through degree-based approximation frameworks.", 	arXiv:1709.09969
 
 [2] Sanz et al. "Dynamics of Interacting Diseases",Phys Rev X, 2014
