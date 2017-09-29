@@ -20,7 +20,7 @@ Two comprehensive examples are included here; these are ExCooperativeSISmodel.m 
 Note the following three important points:
  - The pair approximation ("PA") scheme requires non-zero initial conditions. The reason for this is a division by zero of the state variables (as seen in Eq.(18) of [1]).
  - The default ode solver is used here, ode45. For stiff systems, ode2r should be employed to gaurantee accuracy (This can be done by replacing "ode2r" with "ode45" in lines 116 (MF), 133 (PA) and/or 151 (AME) of the file multi_state_solver.m)
- - If alternatice time stamps are required (from the output t_points), specific time stamps can be specified by the tspan argument on line 104 of multi_state_solver.m. For example, the commented-out line 105 gives time stamps that are evenly spaced, while the commented-out line 106 gives time stamps that are evenly spaced on a logaritmic x-axis. 
+ - If alternative time stamps are required (from the output t_points), specific time stamps can be specified by the tspan argument on line 104 of multi_state_solver.m. For example, the commented-out line 105 gives time stamps that are evenly spaced, while the commented-out line 106 gives time stamps that are evenly spaced on a logaritmic x-axis. 
 
 [1] Fennell, P.G., Gleeson, J.P., "Multistate dynamical processes on networks: Analysis through degree-based approximation frameworks.", 	arXiv:1709.09969
 
