@@ -102,13 +102,12 @@ end
 % Set ODE solver parameters
 options = odeset('RelTol',1e-8,'AbsTol',1e-10); %,'InitialStep',1e-3,'MaxStep',1.5); % defaults are 'RelTol',1e-3,'AbsTol',1e-6
 tspan= [0 endtime];
-% tspan = 0:endtime/100:endtime; (For CoSIS)
+% tspan = 0:endtime/100:endtime;
 % tspan = logspace(0, log10(endtime), 100);
 % tspan = logspace(-2,log10(endtime),300); %0:endtime/100:endtime; %
 
 
 % SOLVERS
-
 
 
 % MF

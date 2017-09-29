@@ -2,10 +2,7 @@
 % a degree regular network (z=4), with the purpose being to compare the
 % AME, PA and MF frameworks. 
 
-% MAKE SURE THE CORRECT RATE FUNCTION IS IN THE F.m FILE
-
-% Add the path of the functions to the search path
-addpath /Users/peterfennell/Dropbox/Research/Projects/'Multistate Dynamics'/'ODE solver'/multi-state-SOLVER
+% MAKE SURE TO UNCOMMENT LINES 20-27 IN THE F_rates.m FILE
 
 % Get the degree distribution Pk aswell as Kmin, Kmaz, average degree etc
 DegreeDistribution = 'zRegular'; % 'PRG' or 'truncSFN' or 'zRegular' or 'custom'
@@ -32,7 +29,7 @@ PhiMF = xMF(:,1) + xMF(:,2);
 
 % AME
 [TAME xAME] = multi_state_solver(n,DegreeDistribution,z,[T f], rho0, endtime, 'AME');
-PhiAME = xAME(:,1) + xAME(:,2);y
+PhiAME = xAME(:,1) + xAME(:,2);
 
 % PA
 % Need to change ICs to have no zeros (as messes with PA)

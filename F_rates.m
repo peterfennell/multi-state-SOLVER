@@ -2,12 +2,19 @@ function F = F_rates(m_vec, DynamicsParams)
 % F(i,j) is the rate that a node will change from state i to state j given that it has m_vec(1) neighbours in state 1, m_vec(2) neighbours in state 2, ..., m_vec(n) neighbours in state n. DynamicsParams is a vector of model parameters (e.g., DynamicsParams = [beta mu] in the case of SIS).
 
 
-
 % % SI/SIS
 % beta = DynamicsParams(1); % Infection rate
 % mu   = DynamicsParams(2); % Recovery rate (set = 0 for SI)
 % F = [0 beta*m_vec(2);
 %     mu 0];
+
+% % Cooperative SIS (Simple)
+% beta   = DynamicsParams(1); % Infection rate
+% lambda = DynamicsParams(2); % Accentuation parameter
+% F = [0 beta*(m_vec(2) + m_vec(4)) beta*(m_vec(3) + m_vec(4)) 0;
+%     1 0 0 beta*lambda*(m_vec(3) + m_vec(4));
+%     1 0 0 beta*lambda*(m_vec(2) + m_vec(4));
+%     0 1 1 0];
 
 % Fredrickson Andersen model
 T = DynamicsParams(1);  % temperature
@@ -37,15 +44,6 @@ end
 %     mu1 0         0        beta2a*lambda2*(m_vec(3)+beta2b*m_vec(4));
 %     mu2 0         0        beta1a*lambda1*(m_vec(2)+beta1b*m_vec(4));
 %     0   eta2*mu2  eta1*mu1 0];
-
-
-% % Cooperative SIS (Simple)
-% beta   = DynamicsParams(1); % Infection rate
-% lambda = DynamicsParams(2); % Accentuation parameter
-% F = [0 beta*(m_vec(2) + m_vec(4)) beta*(m_vec(3) + m_vec(4)) 0;
-%     1 0 0 beta*lambda*(m_vec(3) + m_vec(4));
-%     1 0 0 beta*lambda*(m_vec(2) + m_vec(4));
-%     0 1 1 0];
 
 % % Bass diffusion model
 % c = DynamicsParams(1);
